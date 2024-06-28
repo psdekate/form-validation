@@ -19,20 +19,26 @@
           <span class="label">
             <label for="name">Name</label>
             <input type="text" name="" id="name" placeholder="Enter your name" />
+            <span class="error">Name cannot be blank</span>
           </span>
           <span class="label">
-            <label for="email">Name</label>
+            <label for="email">Email</label>
             <input type="email" name="" id="email" placeholder="Enter your email" />
+            <span class="email-error">Email cannot be blank</span>
+            <span class="invalid-email">Invalid email</span>
           </span>
           <span class="label">
-            <label for="name">Name</label>
+            <label for="name">Phone</label>
             <input type="tel" name="" id="phone" placeholder="Enter your name" />
+            <span class="phone-error">Phone cannot be blank</span>
+            <span class="invalid-phone">Invalid phone</span>
           </span>
           <span class="label">
             <label for="name">Message</label>
             <textarea name="" id="message" placeholder="Enter your message"></textarea>
+            <span class="message-error">Message cannot be blank</span>
           </span>
-          <button class="submit">Submit</button>
+          <button type="submit" id="submit">Submit</button>
         </form>
       </div>
     </div>
