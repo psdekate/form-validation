@@ -5,25 +5,50 @@ export default function Form() {
   const enteredEmail = useRef();
   const enteredPassword = useRef();
 
+  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
   //   const [enteredValues, setEnteredValues] = useState({
   //     email: "",
   //     password: "",
   //   });
 
+  //   const [didEdit, setDidEdit] = useState({
+  //     email: false,
+  //     password: false,
+  //   });
+
   function handleSubmit(event) {
     event.preventDefault();
     const email = enteredEmail.current.value;
-    const password = enteredPassword.current.value;
+    // const password = enteredPassword.current.value;
 
-    console.log(email, password);
+    const invalidEmail = !email.includes("@");
+
+    if (invalidEmail) {
+      setEmailIsInvalid(true);
+      return;
+    }
+    setEmailIsInvalid(false);
+    console.log("Sending HTTP");
   }
 
-  // function handleSubmittedValues(identifier, value) {
-  //   setEnteredValues((prevValue) => ({
-  //     ...prevValue,
-  //     [identifier]: value,
-  //   }));
-  // }
+  //   function handleSubmittedValues(identifier, value) {
+  //     setEnteredValues((prevValue) => ({
+  //       ...prevValue,
+  //       [identifier]: value,
+  //     }));
+  //     setDidEdit((prevValue) => ({
+  //       ...prevValue,
+  //       [identifier]: false,
+  //     }));
+  //   }
+
+  //   function handleEditState(identifier) {
+  //     setDidEdit((prevValue) => ({
+  //       ...prevValue,
+  //       [identifier]: true,
+  //     }));
+  //     console.log(didEdit);
+  //   }
 
   return (
     <form onSubmit={handleSubmit} className="form-wrapper">
@@ -33,9 +58,11 @@ export default function Form() {
           type="text"
           name="email"
           //   value={enteredValues.email}
+          //   onBlur={() => handleEditState("email")}
           //   onChange={(event) => handleSubmittedValues("email", event.target.value)}
           ref={enteredEmail}
         />
+        {emailIsInvalid && <p>Enter a valid email</p>}
       </div>
       <div className="form-element">
         <label htmlFor="password">password</label>
@@ -49,7 +76,9 @@ export default function Form() {
       </div>
       <div className="buttons">
         <button className="submit">Submit</button>
-        <button className="submit">Login</button>
+        <button className="submit" type="reset">
+          Reset
+        </button>
       </div>
     </form>
   );
