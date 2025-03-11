@@ -6,13 +6,15 @@ export default function Form() {
   const enteredPassword = useRef();
 
   const [emailIsInvalid, setEmailIsInvalid] = useState(false);
+  const [passwordIsInvalid, setPasswordIsInvalid] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
     const email = enteredEmail.current.value;
-    // const password = enteredPassword.current.value;
+    const password = enteredPassword.current.value;
 
     const invalidEmail = !email.includes("@");
+    const invalidPassword = password.length < 6;
 
     if (invalidEmail) {
       setEmailIsInvalid(true);
@@ -20,6 +22,13 @@ export default function Form() {
     }
     setEmailIsInvalid(false);
     console.log("Sending HTTP");
+
+    if (invalidPassword) {
+      setPasswordIsInvalid(true);
+      return;
+    }
+    setPasswordIsInvalid(false);
+    console.log("Password is valid");
   }
 
   return (
@@ -32,6 +41,7 @@ export default function Form() {
       <div className="form-element">
         <label htmlFor="password">password</label>
         <input type="password" name="password" ref={enteredPassword} />
+        {passwordIsInvalid && <p>Enter a valid password</p>}
       </div>
       <div className="buttons">
         <button className="submit">Submit</button>
